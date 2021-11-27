@@ -1,14 +1,22 @@
+
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import InitialPageProvider from './context/InitialPageProvider';
 import InitialPage from './pages/InitalPage';
+import QuestionPage from './pages/QuestionPage';
 
 function App() {
   return (
-    <div className="App">
-    <InitialPageProvider>
-      <InitialPage />
-    </InitialPageProvider>
-    </div>
+    <BrowserRouter>
+      <InitialPageProvider>
+        <Switch>
+          <Route exact path="/">
+            <InitialPage />
+          </Route>    
+          <Route path="/questions" component={ QuestionPage } />      
+        </Switch>
+      </InitialPageProvider>
+    </BrowserRouter>
   );
 }
 

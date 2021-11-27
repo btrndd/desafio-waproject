@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import { Button, Card, CardContent, CircularProgress, Typography } from '@mui/material';
 import InitialPageContext from '../context/InitialPageContext';
 import axios from 'axios';

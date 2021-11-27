@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
 function CardQuestion() {
     const [idx, setIdx] = useState(0);
-    const [toggle, setToggle] = useState(false);
-    const [disabled, setDisabled] = useState(false);
+    const [alignment, setAlignment] = useState('');
     const questions = JSON.parse(localStorage.getItem('questions'));
 
     const decodeHTML = (html) => {
@@ -12,35 +12,47 @@ function CardQuestion() {
       return txt.value;
     }
 
+    const handleClickAnswer = () => {
+      setAlignment('correct');
+    }
+
     if (questions) {
       const correctAnswer = ([
-        <button
-          className={ toggle && 'correct' }
-          type="button"
-          key=""
-          disabled={ disabled }
+        <ToggleButton
+          value="correct"
+          size="small"
         >
           { decodeHTML(questions[idx].correct_answer) }
-        </button>]);
+        </ToggleButton>]);
       const incorrctAnswers = questions[idx].incorrect_answers.map((answer, index) => (
-        <button
-          className={ toggle && 'incorrect' }
-          type="button"
+        <ToggleButton
+          value={ `incorret-${index}`}
+          size="small"
+          sx={{ mx: '20px' }}
           key={ index }
-          disabled={ disabled }
         >
           { decodeHTML(answer) }
-        </button>
+        </ToggleButton>
       ));
 
       const arrayQuestions = [...correctAnswer, ...incorrctAnswers];
-      const HALF = 0.5;
+      const HALF = 0.5;    
+      const answers = arrayQuestions.sort(() => Math.round(Math.random()) - HALF)
 
       return (
         <>
           <p>{ decodeHTML(questions[idx].category) }</p>
           <h3>{ decodeHTML(questions[idx].question) }</h3>
-          {arrayQuestions.sort(() => Math.round(Math.random()) - HALF)}
+          <ToggleButtonGroup
+            color="standard"
+            size="small"
+            value={ alignment }
+            exclusive
+            sx={{ mx: '20px' }}
+            onClick={ handleClickAnswer }
+          >
+            { answers }
+          </ToggleButtonGroup>          
         </>
       );
     }

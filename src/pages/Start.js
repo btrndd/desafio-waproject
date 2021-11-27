@@ -3,9 +3,11 @@ import { Button, Card, CardContent, InputLabel, TextField, Typography } from '@m
 import InitialPageContext from '../context/InitialPageContext';
 
 function Start() {
+  const { nQuestions, setNext } = useContext(InitialPageContext);
   return(
     <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }} fixed>
       <CardContent>
+        <Typography variant='h7'>You selected { nQuestions } questions.</Typography>
         <Button
             sx={{ mt: '10px', maxWidth: '300px' }}
             color="primary"
@@ -21,6 +23,7 @@ function Start() {
             variant="outlined"
             fullWidth
             type="submit"
+            onClick={ () => setNext(false) }
           >
             Cancel
           </Button>

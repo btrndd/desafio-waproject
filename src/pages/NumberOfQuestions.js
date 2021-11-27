@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, Card, CardContent, InputLabel, TextField, Typography } from '@mui/material';
+import InitialPageContext from '../context/InitialPageContext';
 
 function NumberOfQuestions() {
+  const { setNext } = useContext(InitialPageContext);
   const validationSchema = yup.object({
     questions: yup
       .number()
@@ -19,11 +21,8 @@ function NumberOfQuestions() {
         questions: '',
       },
       validationSchema: validationSchema,
-      onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
-      },
-    });
-  
+      onSubmit: () => { setNext(true) },
+    });  
 
   return(
     <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }} fixed>

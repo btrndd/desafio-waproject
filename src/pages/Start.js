@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Button, Card, CardContent, InputLabel, TextField, Typography } from '@mui/material';
+import { Button, Card, CardContent, Typography } from '@mui/material';
 import InitialPageContext from '../context/InitialPageContext';
 
 function Start() {

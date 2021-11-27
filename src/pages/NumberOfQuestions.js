@@ -26,22 +26,29 @@ function NumberOfQuestions() {
   
 
   return(
-    <Card sx={{ mx: 'auto', maxWidth: 'sm', minWidth: 275 }} fixed>
+    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }} fixed>
       <CardContent>
       <Typography variant='h5'>Questions{ '&' }Answers</Typography>
       <form onSubmit={formik.handleSubmit}>
-          <InputLabel htmlFor="questions">How many questions?</InputLabel>
+          <InputLabel sx={{ mt: '20px' }} htmlFor="questions">How many questions?</InputLabel>
           <TextField
             id="questions"
             name="questions"
             max="20"
             type="number"
+            sx={{ mt: '10px' }}
             value={formik.values.questions}
             onChange={formik.handleChange}
             error={formik.touched.questions && Boolean(formik.errors.questions)}
             helperText={formik.touched.questions && formik.errors.questions}
           />
-          <Button color="primary" variant="contained" fullWidth  type="submit">
+          <Button
+            sx={{ mt: '10px', maxWidth: '300px' }}
+            color="primary"
+            variant="contained"
+            fullWidth
+            type="submit"
+          >
             Continue
           </Button>
       </form>

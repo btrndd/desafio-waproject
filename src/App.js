@@ -1,10 +1,13 @@
 import './App.css';
-import NumberOfQuestions from './pages/NumberOfQuestions';
+import InitialPageProvider from './context/InitialPageProvider';
+import InitialPage from './pages/InitalPage';
 
 function App() {
   return (
     <div className="App">
-      <NumberOfQuestions />
+    <InitialPageProvider>
+      <InitialPage />
+    </InitialPageProvider>
     </div>
   );
 }

@@ -11,18 +11,24 @@ function Start() {
 
   const options = {
     url: `https://opentdb.com/api.php?amount=${nQuestions}`,
+    method: 'GET',
+    timeout: 4000,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json; charset=UTF-8'
+    }
   }
 
   async function handleStartBtn() {
     setIsFetch(true);  
     const request = await axios(options);
-    console.log(request);
     setQuestions(request.data.results);
+    localStorage.setItem('questions', JSON.stringify(request.data.results));
     history.push('/questions');
   }
 
   return(
-    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }} fixed>
+    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }}>
       <CardContent>
         <Typography variant='h7'>You selected { nQuestions } questions.</Typography>
         <div>

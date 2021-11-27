@@ -25,7 +25,7 @@ function InitialPageProvider({ children }) {
 }
 
 InitialPageProvider.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.element,
 };
 
 export default InitialPageProvider;

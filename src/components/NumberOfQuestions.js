@@ -28,7 +28,7 @@ function NumberOfQuestions() {
     });  
 
   return(
-    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }} fixed>
+    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }}>
       <CardContent>
       <Typography variant='h5'>Questions{ '&' }Answers</Typography>
       <form onSubmit={formik.handleSubmit}>

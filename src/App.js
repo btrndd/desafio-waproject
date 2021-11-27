@@ -10,9 +10,7 @@ function App() {
     <BrowserRouter>
       <InitialPageProvider>
         <Switch>
-          <Route exact path="/">
-            <InitialPage />
-          </Route>    
+          <Route exact path="/" component={ InitialPage } />
           <Route path="/questions" component={ QuestionPage } />      
         </Switch>
       </InitialPageProvider>

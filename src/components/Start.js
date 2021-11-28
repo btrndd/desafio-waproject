@@ -28,9 +28,9 @@ function Start() {
   }
 
   return(
-    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }}>
+    <Card sx={{ mx: '20px', mt: '100px', minWidth: 275 }}>
       <CardContent>
-        <Typography variant='h7'>You selected { nQuestions } questions.</Typography>
+        <Typography variant='h6'>You selected { nQuestions } questions.</Typography>
         <div>
           { isFetch ? (  
             <Button

@@ -1,5 +1,5 @@
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import { Card, CardContent, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import React, { useState } from 'react';
 
 function CardQuestion() {
     const [idx, setIdx] = useState(0);
@@ -21,6 +21,7 @@ function CardQuestion() {
         <ToggleButton
           value="correct"
           size="small"
+          disableElevation
         >
           { decodeHTML(questions[idx].correct_answer) }
         </ToggleButton>]);
@@ -28,36 +29,42 @@ function CardQuestion() {
         <ToggleButton
           value={ `incorret-${index}`}
           size="small"
-          sx={{ mx: '20px' }}
           key={ index }
+          disableElevation
         >
           { decodeHTML(answer) }
         </ToggleButton>
       ));
 
-      const arrayQuestions = [...correctAnswer, ...incorrctAnswers];
-      const HALF = 0.5;    
-      const answers = arrayQuestions.sort(() => Math.round(Math.random()) - HALF)
+      const arrayAnswers = [...correctAnswer, ...incorrctAnswers];
 
       return (
-        <>
-          <p>{ decodeHTML(questions[idx].category) }</p>
-          <h3>{ decodeHTML(questions[idx].question) }</h3>
-          <ToggleButtonGroup
-            color="standard"
-            size="small"
-            value={ alignment }
-            exclusive
-            sx={{ mx: '20px' }}
-            onClick={ handleClickAnswer }
-          >
-            { answers }
-          </ToggleButtonGroup>          
-        </>
+        <Card sx={{ mx: '20px', mt: '100px', minWidth: 275 }}>
+          <CardContent>
+            <div>
+              <Typography variant="h4" sx={{ mb: "10px" }}>Question { idx + 1 }</Typography>
+              <Typography variant="body2" sx={{ mb: "10px" }}>{ decodeHTML(questions[idx].category) }</Typography>
+              <Typography variant="button">
+                { decodeHTML(questions[idx].question) }
+              </Typography>
+            </div>
+            <ToggleButtonGroup
+              color="success"
+              size="small"
+              sx={{ mt: "20px" }}
+              orientation="vertical"              
+              value={ alignment }
+              exclusive
+              onClick={ handleClickAnswer }
+            >
+              { arrayAnswers.sort(() => Math.round(Math.random()) - 0.5) }
+            </ToggleButtonGroup>
+          </CardContent>
+        </Card>
       );
     }
     return(
-      <p>Couldn't find your question :( </p>
+      <Typography variant="h6">Oops! Something went wrong :( </Typography>
     )
   }
 

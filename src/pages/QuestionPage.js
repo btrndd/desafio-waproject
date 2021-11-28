@@ -1,9 +1,14 @@
 import React from 'react';
 import CardQuestion from '../components/CardQuestion.js';
+import { Card, CardContent } from '@mui/material';
 
 function QuestionPage() {
   return(
-    <CardQuestion />
+    <Card sx={{ mx: '20px', mt: '100px', minWidth: 275 }}>
+      <CardContent>
+        <CardQuestion />
+      </CardContent>
+    </Card>
   )
 }
 

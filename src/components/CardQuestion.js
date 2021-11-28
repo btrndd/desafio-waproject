@@ -1,4 +1,4 @@
-import { Card, CardContent, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
+import { ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 function CardQuestion() {
@@ -38,29 +38,27 @@ function CardQuestion() {
 
       const arrayAnswers = [...correctAnswer, ...incorrctAnswers];
 
-      return (
-        <Card sx={{ mx: '20px', mt: '100px', minWidth: 275 }}>
-          <CardContent>
+      return (        
+          <>
             <div>
-              <Typography variant="h4" sx={{ mb: "10px" }}>Question { idx + 1 }</Typography>
-              <Typography variant="body2" sx={{ mb: "10px" }}>{ decodeHTML(questions[idx].category) }</Typography>
+              <Typography variant="h4" sx={{ mb: "10px" }}>Question {idx + 1}</Typography>
+              <Typography variant="body2" sx={{ mb: "10px" }}>{decodeHTML(questions[idx].category)}</Typography>
               <Typography variant="button">
-                { decodeHTML(questions[idx].question) }
+                {decodeHTML(questions[idx].question)}
               </Typography>
             </div>
             <ToggleButtonGroup
               color="success"
               size="small"
               sx={{ mt: "20px" }}
-              orientation="vertical"              
-              value={ alignment }
+              orientation="vertical"
+              value={alignment}
               exclusive
-              onClick={ handleClickAnswer }
+              onClick={handleClickAnswer}
             >
-              { arrayAnswers.sort(() => Math.round(Math.random()) - 0.5) }
+              {arrayAnswers.sort(() => Math.round(Math.random()) - 0.5)}
             </ToggleButtonGroup>
-          </CardContent>
-        </Card>
+          </>
       );
     }
     return(

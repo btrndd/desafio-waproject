@@ -5,7 +5,7 @@ import { Button, Card, CardContent, InputLabel, TextField, Typography } from '@m
 import InitialPageContext from '../context/InitialPageContext';
 
 function NumberOfQuestions() {
-  const { setNext, setNQuestions } = useContext(InitialPageContext);
+  const { setNext, setNQuestion } = useContext(InitialPageContext);
   const validationSchema = yup.object({
     questions: yup
       .number()
@@ -27,7 +27,7 @@ function NumberOfQuestions() {
           questionsNumber: value.questions
         }
         localStorage.setItem('questionsNumber', JSON.stringify(questionsNumber))
-        setNQuestions(value.questions);
+        setNQuestion(value.questions);
       },
     });  
 

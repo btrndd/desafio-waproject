@@ -8,24 +8,18 @@ function QuestionPage() {
   const [idx, setIdx] = useState(0);
   const [alignment, setAlignment] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const { nQuestions } = useContext(InitialPageContext);
   const history = useHistory();
 
   function handleNextQuestion() {
-    const MAX_ARRAY = nQuestions;
-    if (idx === MAX_ARRAY) {      
+    const MAX_ARRAY = JSON.parse(localStorage.getItem('questionsNumber')).questionsNumber;
+    console.log(MAX_ARRAY);
+    if ((idx + 1) === MAX_ARRAY) {      
       return history.push('/report');
+    } else {
+      setIdx(idx + 1)
+      setDisabled(true);
+      setAlignment('')
     }
-    setIdx(idx + 1)
-    setDisabled(true);
-    setAlignment('')
-    // this.setState({ nextQuestion: false });
-    // this.setState({
-    //   idx: idx + 1,
-    //   stopTimer: false,
-    //   toggle: false,
-    //   disabled: false,
-    // }, () => this.setState({ nextQuestion: true }));
   }
 
   return(

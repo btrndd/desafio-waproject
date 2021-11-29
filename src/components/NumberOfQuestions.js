@@ -23,6 +23,10 @@ function NumberOfQuestions() {
       validationSchema: validationSchema,
       onSubmit: (value) => { 
         setNext(true);
+        const questionsNumber = {
+          questionsNumber: value.questions
+        }
+        localStorage.setItem('questionsNumber', JSON.stringify(questionsNumber))
         setNQuestions(value.questions);
       },
     });  

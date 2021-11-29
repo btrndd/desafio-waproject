@@ -9,7 +9,8 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment }) {
       return txt.value;
     }
 
-    const handleClickAnswer = () => {
+    const handleClickAnswer = (event) => {
+      console.log(event.target.value)
       setAlignment('correct');
       setDisabled(false);
     }
@@ -19,16 +20,15 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment }) {
         <ToggleButton
           value="correct"
           size="small"
-          disableElevation
+          key=""
         >
           { decodeHTML(questions[idx].correct_answer) }
         </ToggleButton>]);
       const incorrctAnswers = questions[idx].incorrect_answers.map((answer, index) => (
         <ToggleButton
-          value={ `incorret-${index}` }
+          value={ index }
           size="small"
           key={ index }
-          disableElevation
         >
           { decodeHTML(answer) }
         </ToggleButton>
@@ -52,7 +52,7 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment }) {
               orientation="vertical"
               value={ alignment }
               exclusive
-              onClick={ handleClickAnswer }
+              onClick={(event) => handleClickAnswer(event) }
             >
               {arrayAnswers.sort(() => Math.round(Math.random()) - 0.5)}
             </ToggleButtonGroup>

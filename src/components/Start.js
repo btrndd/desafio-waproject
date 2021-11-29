@@ -5,12 +5,14 @@ import InitialPageContext from '../context/InitialPageContext';
 import axios from 'axios';
 
 function Start() {
-  const { nQuestions, setNext, setQuestions } = useContext(InitialPageContext);
+  const { setNext, setQuestions } = useContext(InitialPageContext);
   const [isFetch, setIsFetch] = useState(false);
   const history = useHistory();
 
+  const questionsNumber = JSON.parse(localStorage.getItem('questionsNumber')).questionsNumber;
+
   const options = {
-    url: `https://opentdb.com/api.php?amount=${nQuestions}`,
+    url: `https://opentdb.com/api.php?amount=${questionsNumber}`,
     method: 'GET',
     timeout: 4000,
     headers: {
@@ -30,7 +32,7 @@ function Start() {
   return(
     <Card sx={{ mx: '20px', mt: '100px', minWidth: 275 }}>
       <CardContent>
-        <Typography variant='h6'>You selected { nQuestions } questions.</Typography>
+        <Typography variant='h6'>You selected { questionsNumber } questions.</Typography>
         <div>
           { isFetch ? (  
             <Button

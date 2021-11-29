@@ -12,8 +12,6 @@ function QuestionPage() {
 
   const report = {
     score: 0,
-    correct_questions: [],
-    wrong_questions: [],
   }
 
   useEffect(() => {
@@ -34,6 +32,7 @@ function QuestionPage() {
         value="correct"
         size="small"
         key=""
+        name={ decodeHTML(questions[id].correct_answer) }
       >
         { decodeHTML(questions[id].correct_answer) }
       </ToggleButton>]);
@@ -42,6 +41,7 @@ function QuestionPage() {
         value={ index }
         size="small"
         key={ index }
+        name={ decodeHTML(answer) }
       >
         { decodeHTML(answer) }
       </ToggleButton>

@@ -5,16 +5,16 @@ import InitialPageContext from './InitialPageContext';
 
 function InitialPageProvider({ children }) {
   const [next, setNext] = useState(false);
-  const [nQuestions, setNQuestions] = useState(NaN);
   const [questions, setQuestions] = useState([]);
+  const [nQuestion, setNQuestion] = useState(0);
 
   const contextValue = {
     next,
     setNext,
-    nQuestions,
-    setNQuestions,
     questions,
     setQuestions,
+    nQuestion, 
+    setNQuestion,
   };
 
   return (

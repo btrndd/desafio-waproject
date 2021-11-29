@@ -5,7 +5,7 @@ import { Button, Card, CardContent, InputLabel, TextField, Typography } from '@m
 import InitialPageContext from '../context/InitialPageContext';
 
 function NumberOfQuestions() {
-  const { setNext, setNQuestions } = useContext(InitialPageContext);
+  const { setNext, setNQuestion } = useContext(InitialPageContext);
   const validationSchema = yup.object({
     questions: yup
       .number()
@@ -23,7 +23,11 @@ function NumberOfQuestions() {
       validationSchema: validationSchema,
       onSubmit: (value) => { 
         setNext(true);
-        setNQuestions(value.questions);
+        const questionsNumber = {
+          questionsNumber: value.questions
+        }
+        localStorage.setItem('questionsNumber', JSON.stringify(questionsNumber))
+        setNQuestion(value.questions);
       },
     });  
 

@@ -14,20 +14,22 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers,
 
     const handleClickAnswer = ({ target }) => {
       const score = JSON.parse(localStorage.getItem('report'));
+      console.log(target.name)
       if (target.value === 'correct') {        
         const report = {
+          ...score,
           score: (score.score + 1),
-          correct_questions: [...score['correct_questions'], questions[idx]],
-          wrong_questions: [...score['wrong_questions']],
+          [`question${idx + 1}`]: [questions[idx].question, target.name, questions[idx].correct_answer]
         };
         localStorage.setItem('report', JSON.stringify(report));
-      }
-      const report = {
-        score: (score.score),
-        correct_questions: [...score['correct_questions']],
-        wrong_questions: [...score['wrong_questions'], questions[idx]],
-      };
-      localStorage.setItem('report', JSON.stringify(report));
+      } else if (target.value !== 'correct') {
+        const report = {
+          ...score,
+          score: (score.score),          
+          [`question${idx + 1}`]: [questions[idx].question, target.name, questions[idx].correct_answer],
+        };
+        localStorage.setItem('report', JSON.stringify(report));
+      }           
       setAlignment('correct');
       setDisabled(false);
     }

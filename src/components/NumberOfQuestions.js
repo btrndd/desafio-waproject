@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Button, Card, CardContent, InputLabel, TextField, Typography } from '@mui/material';
 import InitialPageContext from '../context/InitialPageContext';
+import { useHistory } from 'react-router';
 
 function NumberOfQuestions() {
   const { setNext, setNQuestion } = useContext(InitialPageContext);
@@ -29,7 +30,10 @@ function NumberOfQuestions() {
         localStorage.setItem('questionsNumber', JSON.stringify(questionsNumber))
         setNQuestion(value.questions);
       },
-    });  
+    });
+
+    const history = useHistory();
+    const report = JSON.parse(localStorage.getItem('report'));
 
   return(
     <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }}>
@@ -58,6 +62,9 @@ function NumberOfQuestions() {
             Continue
           </Button>
       </form>
+      { report && <Button sx={{ mt: "10px" }} onClick={() => history.push('/report')}>
+        RESUME LAST GAME
+      </Button> }
     </CardContent>
   </Card>
   )

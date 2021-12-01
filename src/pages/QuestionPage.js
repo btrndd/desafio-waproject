@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CardQuestion from '../components/CardQuestion.js';
 import { ToggleButton, Button, Card, CardContent } from '@mui/material';
-import { useHistory } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
 function QuestionPage() {
   const [idx, setIdx] = useState(0);
@@ -24,7 +24,10 @@ function QuestionPage() {
     return txt.value;  
   }
 
-  const questions = JSON.parse(localStorage.getItem('questions'));    
+  const questions = JSON.parse(localStorage.getItem('questions'))
+  if (!questions) {
+    return <Redirect to="/" />;
+  }
 
   const arrayAnswers = (id) => {
     const correctAnswer = ([

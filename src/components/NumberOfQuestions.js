@@ -36,7 +36,7 @@ function NumberOfQuestions() {
     const report = JSON.parse(localStorage.getItem('report'));
 
   return(
-    <Card sx={{ mx: '20px', mt: '100px', maxWidth: 'sm', minWidth: 275 }}>
+    <Card sx={{ mx: '20px', mt: '100px', minWidth: 100 }}>
       <CardContent>
       <Typography variant='h5'>Questions{ '&' }Answers</Typography>
       <form onSubmit={formik.handleSubmit}>

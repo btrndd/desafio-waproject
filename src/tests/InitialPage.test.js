@@ -70,7 +70,7 @@ describe('Testando a tela inicial', () => {
     expect(title).toBeInTheDocument();
   });
   it('se o botão de start redireciona pra próxima tela', async () => {
-    const { history } = renderWithRouter(<App />);
+    renderWithRouter(<App />);
     const input = screen.getByLabelText(/How many questions?/i);
     const continueBtn = screen.getByRole('button'); 
     userEvent.type(input, '5');

@@ -2,7 +2,12 @@ import { ToggleButtonGroup, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers, answers }) {
-    const [isSorted, setIsSorted] = useState(false);    
+  const [isSorted, setIsSorted] = useState(false)
+
+  useEffect(() => {
+    arrayAnswers(idx);      
+    setIsSorted(true);
+  }, []);  
     
     const decodeHTML = (html) => {
       const txt = document.createElement('textarea');
@@ -10,7 +15,7 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers,
       return txt.value;  
     }
 
-    const questions = JSON.parse(localStorage.getItem('questions')); 
+    const questions = JSON.parse(localStorage.getItem('questions'));    
 
     const handleClickAnswer = ({ target }) => {
       const score = JSON.parse(localStorage.getItem('report'));
@@ -32,12 +37,7 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers,
       }           
       setAlignment('correct');
       setDisabled(false);
-    }
-
-    useEffect(() => {
-      arrayAnswers(idx);      
-      setIsSorted(true);
-    }, []);    
+    }     
 
     return (        
         <>

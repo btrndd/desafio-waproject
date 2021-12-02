@@ -32,6 +32,7 @@ function QuestionPage() {
   const arrayAnswers = (id) => {
     const correctAnswer = ([
       <ToggleButton
+        data-testid="correct-answer"
         value="correct"
         size="small"
         key=""
@@ -41,6 +42,7 @@ function QuestionPage() {
       </ToggleButton>]);
     const incorrctAnswers = questions[id].incorrect_answers.map((answer, index) => (
       <ToggleButton
+        data-testid="wrong-answer"
         value={ index }
         size="small"
         key={ index }

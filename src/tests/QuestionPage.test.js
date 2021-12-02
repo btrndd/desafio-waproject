@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import data from '../testData';
 import axios from 'axios';
-import renderWithRouter from '../renderWithRouter';
 
 jest.mock('axios')
 
@@ -94,18 +93,28 @@ describe('Testando a tela de perguntas', () => {
   it('se ao chegar na última pergunta, vai pra tela de relatório', async () => {
     await act(async () => {
       render(<App />);
+      const questionsNumber = {
+        questionsNumber: 3,
+      }
+      const mockFn = jest.fn( localStorage.setItem );
+      localStorage.setItem = mockFn;
+      localStorage.setItem('questionsNumber', JSON.stringify(questionsNumber));
     })
+    for (let index = 0; index <= 3; index += 1) {
+      await waitFor(() => {      
+        const nextBtn = screen.getByText('Next');
+        const correctAnswer = screen.getByTestId('correct-answer');
+        userEvent.click(correctAnswer);
+        userEvent.click(nextBtn);
+      });
+    };
     await waitFor(() => {
-      // const { history } = render;
-      const nextBtn1 = screen.getByText('Next');
-      const correctAnswer1 = screen.getByTestId('correct-answer');
-      userEvent.click(correctAnswer1);
-      userEvent.click(nextBtn1);
-      const question2 = screen.getByText('Question 2');
-      expect(question2).toBeInTheDocument();
-      history.push('/report');
+      const nextBtn = screen.getByText('Next');
+      const correctAnswer = screen.getByTestId('correct-answer');
+      userEvent.click(correctAnswer);
+      userEvent.click(nextBtn);
       const results = screen.getByText('Your Results');
       expect(results).toBeInTheDocument();
-    });
+    })    
   });
 });

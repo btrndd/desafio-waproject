@@ -21,7 +21,6 @@ function Start() {
   async function handleStartBtn() {
     setIsFetch(true);  
     const { data: { results } } = await axios.get(options.url);
-    // console.log(results);
     setQuestions(results);
     localStorage.setItem('questions', JSON.stringify(results));    
     history.push('/questions');

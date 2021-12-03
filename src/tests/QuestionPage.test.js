@@ -5,11 +5,11 @@ import App from '../App';
 import data from '../testData';
 import axios from 'axios';
 
-jest.mock('axios')
+jest.mock('axios');
 
 const mockFetch = () => {
   axios.get.mockImplementation(() => Promise.resolve(data));
-}
+};
 
 const getToQuestionPage = async () => {  
   await act(async () => {

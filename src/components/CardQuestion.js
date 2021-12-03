@@ -2,7 +2,12 @@ import { ToggleButtonGroup, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 
 function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers, answers }) {
-    const [isSorted, setIsSorted] = useState(false);    
+  const [isSorted, setIsSorted] = useState(false)
+
+  useEffect(() => {
+    arrayAnswers(idx);      
+    setIsSorted(true);
+  }, []);  
     
     const decodeHTML = (html) => {
       const txt = document.createElement('textarea');
@@ -10,11 +15,10 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers,
       return txt.value;  
     }
 
-    const questions = JSON.parse(localStorage.getItem('questions')); 
+    const questions = JSON.parse(localStorage.getItem('questions'));    
 
     const handleClickAnswer = ({ target }) => {
       const score = JSON.parse(localStorage.getItem('report'));
-      console.log(target.name)
       if (target.value === 'correct') {        
         const report = {
           ...score,
@@ -32,19 +36,14 @@ function CardQuestion({ idx, setDisabled, alignment, setAlignment, arrayAnswers,
       }           
       setAlignment('correct');
       setDisabled(false);
-    }
-
-    useEffect(() => {
-      arrayAnswers(idx);      
-      setIsSorted(true);
-    }, []);    
+    }     
 
     return (        
         <>
           <div>
             <Typography variant="h4" sx={{ mb: "10px" }}>Question {idx + 1}</Typography>
-            <Typography variant="body2" sx={{ mb: "10px" }}>{decodeHTML(questions[idx].category)}</Typography>
-            <Typography variant="button">
+            <Typography data-testid="category" variant="body2" sx={{ mb: "10px" }}>{decodeHTML(questions[idx].category)}</Typography>
+            <Typography data-testid="question" variant="button">
               { decodeHTML(questions[idx].question) }
             </Typography>
           </div>

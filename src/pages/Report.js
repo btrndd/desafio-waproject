@@ -1,18 +1,23 @@
 import React from 'react';
 import { Card, CardContent, Paper, Typography } from '@mui/material';
+import { Redirect } from 'react-router';
 
 function Report() {
-  const { score } = JSON.parse(localStorage.getItem('report'));
-  const report = JSON.parse(localStorage.getItem('report'));
-  const reportKeys = Object.keys(report);
-  const questionsKeys = reportKeys.filter((key) => key !== 'score');
-  const { questionsNumber } = JSON.parse(localStorage.getItem('questionsNumber'));
-
   const decodeHTML = (html) => {
     const txt = document.createElement('textarea');
     txt.innerHTML = html;
     return txt.value;  
   }
+
+  const report = JSON.parse(localStorage.getItem('report'));
+  if (!report) {
+    return <Redirect to="/" />;
+  }
+
+  const reportKeys = Object.keys(report);
+  const questionsKeys = reportKeys.filter((key) => key !== 'score'); 
+  const { score } = JSON.parse(localStorage.getItem('report'));
+  const { questionsNumber } = JSON.parse(localStorage.getItem('questionsNumber'));
 
   const list = () => {
     return questionsKeys.map((key, index) => { return (

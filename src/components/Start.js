@@ -20,9 +20,9 @@ function Start() {
 
   async function handleStartBtn() {
     setIsFetch(true);  
-    const request = await axios(options);
-    setQuestions(request.data.results);
-    localStorage.setItem('questions', JSON.stringify(request.data.results));    
+    const { data: { results } } = await axios.get(options.url);
+    setQuestions(results);
+    localStorage.setItem('questions', JSON.stringify(results));    
     history.push('/questions');
   }
 

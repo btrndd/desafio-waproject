@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CardQuestion from '../components/CardQuestion.js';
 import { ToggleButton, Button, Card, CardContent } from '@mui/material';
-import { useHistory } from 'react-router';
+import { Redirect, useHistory } from 'react-router';
 
 function QuestionPage() {
   const [idx, setIdx] = useState(0);
@@ -24,11 +24,15 @@ function QuestionPage() {
     return txt.value;  
   }
 
-  const questions = JSON.parse(localStorage.getItem('questions'));    
+  const questions = JSON.parse(localStorage.getItem('questions'))
+  if (!questions) {
+    return <Redirect to="/" />;
+  }
 
   const arrayAnswers = (id) => {
     const correctAnswer = ([
       <ToggleButton
+        data-testid="correct-answer"
         value="correct"
         size="small"
         key=""
@@ -38,6 +42,7 @@ function QuestionPage() {
       </ToggleButton>]);
     const incorrctAnswers = questions[id].incorrect_answers.map((answer, index) => (
       <ToggleButton
+        data-testid="wrong-answer"
         value={ index }
         size="small"
         key={ index }
